@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Azure.NotificationHubs.Auth;
@@ -64,7 +65,7 @@ namespace Microsoft.Azure.NotificationHubs
         /// <exception cref="ArgumentException"> Thrown when addresses list is null or empty. </exception>
         /// <exception cref="UriFormatException"> Thrown when address is not correctly formed. </exception>
         public NamespaceManager(IList<string> addresses)
-            : this(addresses, (TokenProvider)null)
+            : this(addresses, (TokenProvider) null)
         {
         }
 
@@ -72,7 +73,7 @@ namespace Microsoft.Azure.NotificationHubs
         /// <param name="address">The full address of the namespace.</param>
         /// <exception cref="ArgumentNullException">Thrown when address is null. </exception>
         public NamespaceManager(Uri address)
-            : this(address, (TokenProvider)null)
+            : this(address, (TokenProvider) null)
         {
         }
 
@@ -482,8 +483,9 @@ namespace Microsoft.Azure.NotificationHubs
         /// <summary>Submits the notification hub job asynchronously.</summary>
         /// <param name="job">The job to submit.</param>
         /// <param name="notificationHubPath">The notification hub path.</param>
-        /// <returns>A task that represents the asynchronous get job operation</returns>
-        public async Task<NotificationHubJob> SubmitNotificationHubJobAsync(NotificationHubJob job, string notificationHubPath)
+        /// <param name="cancellationToken">Allows for premature termination of this operation.</param>
+        /// <returns>A task that represents the asynchronous get job operation.</returns>
+        public async Task<NotificationHubJob> SubmitNotificationHubJobAsync(NotificationHubJob job, string notificationHubPath, CancellationToken cancellationToken = default)
         {
             if (job == null)
             {
@@ -509,7 +511,7 @@ namespace Microsoft.Azure.NotificationHubs
                 httpRequestMessage.Content = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(xmlBody)));
 
                 return httpRequestMessage;      
-            }).ConfigureAwait(false))
+            }, cancellationToken).ConfigureAwait(false))
             {
                 var xmlResponse = await GetXmlContent(response).ConfigureAwait(false);
                 return GetModelFromResponse<NotificationHubJob>(xmlResponse);
@@ -640,7 +642,7 @@ namespace Microsoft.Azure.NotificationHubs
 
             return httpRequestMessage;
         }
-        private async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> generateHttpRequestMessage) 
+        private async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> generateHttpRequestMessage, CancellationToken cancellationToken = default) 
         {
             using (var client = new HttpClient())
             {
@@ -652,7 +654,7 @@ namespace Microsoft.Azure.NotificationHubs
                         var httpRequestMessage = generateHttpRequestMessage(); 
                         httpRequestMessage.Headers.Add(TrackingIdHeaderKey, trackingId);   
 
-                        var httpResponseMessage = await client.SendAsync(httpRequestMessage).ConfigureAwait(false);
+                        var httpResponseMessage = await client.SendAsync(httpRequestMessage, cancellationToken).ConfigureAwait(false);
                         httpResponseMessage.Headers.Add(TrackingIdHeaderKey, trackingId);
 
                         return httpResponseMessage;
