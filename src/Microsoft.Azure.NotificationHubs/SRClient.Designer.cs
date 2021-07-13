@@ -457,6 +457,33 @@ namespace Microsoft.Azure.NotificationHubs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Browser Push Endpoint is invalid..
+        /// </summary>
+        internal static string BrowserEndpointInvalid {
+            get {
+                return ResourceManager.GetString("BrowserEndpointInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Browser Push P256DH public key is invalid..
+        /// </summary>
+        internal static string BrowserP256DHInvalid {
+            get {
+                return ResourceManager.GetString("BrowserP256DHInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Browser Push Auth secret is invalid..
+        /// </summary>
+        internal static string BrowserPushAuthInvalid {
+            get {
+                return ResourceManager.GetString("BrowserPushAuthInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The buffer has already been reclaimed..
         /// </summary>
         internal static string BufferAlreadyReclaimed {
