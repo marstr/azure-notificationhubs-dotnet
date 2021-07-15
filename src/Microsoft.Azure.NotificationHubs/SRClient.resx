@@ -1303,4 +1303,16 @@
   <data name="BrowserPushAuthInvalid" xml:space="preserve">
     <value>The Browser Push Auth secret is invalid.</value>
   </data>
+  <data name="BrowserTtlDeserializationError" xml:space="preserve">
+    <value>The TTL header must be non-negative.</value>
+  </data>
+  <data name="BrowserTopicInvalidCharacter" xml:space="preserve">
+    <value>Topic header may not include the character '{0}'.</value>
+  </data>
+  <data name="BrowserTopicTooLong" xml:space="preserve">
+    <value>Topic header may not exceed 32 characters in length.</value>
+  </data>
+  <data name="BrowserUrgencyUnrecognized" xml:space="preserve">
+    <value>Urgency value was not recognized as one of the four valid options.</value>
+  </data>
 </root>

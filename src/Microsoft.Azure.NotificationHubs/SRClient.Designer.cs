@@ -484,6 +484,42 @@ namespace Microsoft.Azure.NotificationHubs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Topic header may not include the character &apos;{0}&apos;..
+        /// </summary>
+        internal static string BrowserTopicInvalidCharacter {
+            get {
+                return ResourceManager.GetString("BrowserTopicInvalidCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Topic header may not exceed 32 characters in length..
+        /// </summary>
+        internal static string BrowserTopicTooLong {
+            get {
+                return ResourceManager.GetString("BrowserTopicTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The TTL header must be non-negative..
+        /// </summary>
+        internal static string BrowserTtlDeserializationError {
+            get {
+                return ResourceManager.GetString("BrowserTtlDeserializationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urgency value was not recognized as one of the four valid options..
+        /// </summary>
+        internal static string BrowserUrgencyUnrecognized {
+            get {
+                return ResourceManager.GetString("BrowserUrgencyUnrecognized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The buffer has already been reclaimed..
         /// </summary>
         internal static string BufferAlreadyReclaimed {
